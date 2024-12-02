@@ -1,5 +1,6 @@
 mod one;
+mod two;
 
 fn main() {
-    let _ = one::run();
+    two::run();
 }
