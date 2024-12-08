@@ -29,7 +29,15 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
     let mut products: Vec<i32> = Vec::new();
 
     for i in 0..lefts.len() {
-        products.push(lefts[i] * rights.iter().filter(|&&x| x == lefts[i]).cloned().collect::<Vec<i32>>().len() as i32);
+        products.push(
+            lefts[i]
+                * rights
+                    .iter()
+                    .filter(|&&x| x == lefts[i])
+                    .cloned()
+                    .collect::<Vec<i32>>()
+                    .len() as i32,
+        );
     }
 
     let sum: i32 = products.iter().sum();

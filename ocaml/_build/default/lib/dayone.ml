@@ -9,16 +9,21 @@ let read_file name =
 
 let f = read_file file
 
+let rec remove_last l =
+   match l with
+   | [] -> []
+   | [_] -> []
+   | hd::tl -> hd::(remove_last tl);;
+
 let parse_line line =
     match String.split_on_char ' ' (String.trim line) with
     | [left; right] -> (int_of_string left, int_of_string right)
     | _ -> failwith ("Invalid line format" ^ line)
 
-let lines = String.split_on_char '\n' f
+let lines = remove_last (String.split_on_char '\n' f)
 
 let (left_list, right_list) =
-    List.fold_right
-        (fun line (left_acc, right_acc) ->
+    List.fold_right (fun line (left_acc, right_acc) ->
             let (left, right) = parse_line line in
             (left :: left_acc, right :: right_acc)
         )
